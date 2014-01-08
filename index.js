@@ -101,7 +101,12 @@ var Retain = (function()
 
   Retain.prototype.get = function(prop)
   {
-    return Q(this._keys[prop])
+    return this._keys[prop]
+  }
+
+  Retain.prototype.save = function()
+  {
+    return Q(this);
   }
 
   return Retain;
