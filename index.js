@@ -64,7 +64,7 @@ var Retain = (function()
         record[key] = value;
       }
     }
-
+    this._records.push(record);
     return record;
   }
 
@@ -85,7 +85,6 @@ var Retain = (function()
 
     if(args.length === 1)
     {
-      console.log("msg");
       for(var prop in args)
       {
         if(this.constructor._attrs[prop])
