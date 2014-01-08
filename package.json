@@ -23,6 +23,6 @@
   },
   "homepage": "https://github.com/giuliandrimba/retain",
   "dependencies": {
-    "aware": "~0.2.0"
+    "q": "~1.0.0"
   }
 }

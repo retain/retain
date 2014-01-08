@@ -1,4 +1,4 @@
-var aware = require("aware");
+var Q = require("q");
 
 var Retain = (function()
 {
@@ -69,7 +69,7 @@ var Retain = (function()
   }
 
   // Instance methods and properties
-  Retain.prototype._keys = aware()
+  Retain.prototype._keys = {}
 
   Retain.prototype._cid = {}
 
@@ -89,19 +89,19 @@ var Retain = (function()
       {
         if(this.constructor._attrs[prop])
         {
-          this._keys.set(prop, args[prop])
+          this._keys[prop] = args[prop]
         }
       }
     }
     else
     {
-      this._keys.set(args[0], args[1]);
+      this._keys[args[0]] = args[1]
     }
   }
 
   Retain.prototype.get = function(prop)
   {
-    return this._keys.get(prop);
+    return Q(this._keys[prop])
   }
 
   return Retain;

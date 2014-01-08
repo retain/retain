@@ -1,27 +1,16 @@
 var Retain = require("./index")
 
-// var Model = Retain.extend();
+var Model = Retain.extend();
 
-// Model.attrs({
-//   name:String,
-//   active:false,
-//   id:Number
-// })
-
-// Model.new()
-
-var ActiveRecord = Retain.extend();
-
-ActiveRecord.attrs({
+Model.attrs({
   description:String
 })
 
-var record = ActiveRecord.new({description:"teste"})
-
-console.log(record.get("description"));
+var record = Model.new({description:"teste"})
 
 record.set("description", "Ola")
 
-console.log(record.get("description"));
-
-// console.log("record", record);
+record.get("description").then(function(data)
+{
+  console.log("description =", data);
+})
