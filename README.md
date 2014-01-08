@@ -3,9 +3,7 @@ Retain
 
 Javascript Model based on promises with plugins support
 
-Usage Draft
-==
-
+###Usage Draft
 ``` javascript
 
 var Retain = require("./index")
