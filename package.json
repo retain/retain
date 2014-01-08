@@ -1,0 +1,25 @@
+{
+  "name": "keep",
+  "version": "0.0.1",
+  "description": "Javascript Model based on promises with plugins support",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/giuliandrimba/keep.git"
+  },
+  "keywords": [
+    "model",
+    "keep",
+    "javascript",
+    "promise"
+  ],
+  "author": "Giulian Drimba",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/giuliandrimba/keep/issues"
+  },
+  "homepage": "https://github.com/giuliandrimba/keep"
+}
