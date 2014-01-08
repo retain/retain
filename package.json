@@ -1,6 +1,6 @@
 {
   "name": "retain",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Javascript Model based on promises with plugins support",
   "main": "index.js",
   "scripts": {
@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/giuliandrimba/retain/issues"
   },
-  "homepage": "https://github.com/giuliandrimba/retain"
+  "homepage": "https://github.com/giuliandrimba/retain",
+  "dependencies": {
+    "aware": "~0.2.0"
+  }
 }
