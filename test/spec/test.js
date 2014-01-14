@@ -120,6 +120,12 @@ describe("Retain", function()
         console.log(data.length);
       })
 
+      // Save always return a promise
+      v.save().then(function(record)
+      {
+        console.log(record.get("name"));
+      })
+
       done();
     });
 
