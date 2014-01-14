@@ -120,13 +120,6 @@ describe("Retain", function()
         console.log(data.length);
       })
 
-      console.log(v.save().get("name"));
-
-      v.p.save().then(function(record)
-      {
-        console.log(record.get("name"));
-      })
-
       done();
     });
 
