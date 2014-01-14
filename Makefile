@@ -7,7 +7,7 @@ ISTANBUL = ./node_modules/istanbul/lib/cli.js
 test: test-mocha
 
 test-mocha:
-	$(MOCHA) --timeout 200 $(TESTS)
+	$(MOCHA) --timeout 200 $(TESTS) --reporter spec
 
 test-cov: istanbul
 
