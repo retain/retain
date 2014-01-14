@@ -1,0 +1,3 @@
+before_script: 'npm install -g istanbul && npm install -g mocha'
+script: 'make test-cov'
+after_success: 'make coveralls'
