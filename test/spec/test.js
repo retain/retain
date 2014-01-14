@@ -6,6 +6,8 @@ describe("Retain", function()
 {
   var Movie = retain.extend();
 
+  console.log(Movie.prototype);
+
   describe("static methods", function()
   {
     it("should create a new Retain instance without error", function(done)
@@ -93,7 +95,7 @@ describe("Retain", function()
       var pulpFiction = Movie.new()
 
       pulpFiction.set("name", "Pulp Fiction");
-      
+
       assert.equal(pulpFiction.get("name"), "Pulp Fiction");
 
       pulpFiction.set({
@@ -103,6 +105,27 @@ describe("Retain", function()
 
       assert.equal(pulpFiction.get("watched"), true);
       assert.equal(pulpFiction.get("duration"), 154);
+
+      done();
+    });
+
+    it("should use the promise",function(done)
+    {
+      var v = Movie.new();
+      v.set("name","V")
+
+      console.log(Movie.all().length);
+      Movie.p.all().then(function(data)
+      {
+        console.log(data.length);
+      })
+
+      console.log(v.save().get("name"));
+
+      v.p.save().then(function(record)
+      {
+        console.log(record.get("name"));
+      })
 
       done();
     });
