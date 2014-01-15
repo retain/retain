@@ -22,21 +22,19 @@ Model.use(ajax_middleware, {
 
 var record = Model.new({description:"teste"})
 
-// Get the data locally (saved in memory)
+// Get the data remotelly (returns a promise)
 Model.all()
 
-// Get the data remotelly (returns a promise)
-Model.p.all()
+//Create a local instance
+Model.new()
+
+//Create a local instance, and save it remotelly (returns a promise)
+Model.create()
 
 // Set locally
 record.set("description", "Ola")
 
-// Set remotelly, returns a promise
-record.p.set("description", "Ola")
+// Set remotelly (returns a promise)
+record.update("description", "Ola")
 
-// Get locally
-record.get("description") // Ola
-
-// Get remotelly, returns a promise
-record.p.get("description") // Ola
 ```
