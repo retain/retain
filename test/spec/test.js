@@ -6,8 +6,6 @@ describe("Retain", function()
 {
   var Movie = retain.extend();
 
-  console.log(Movie.prototype);
-
   describe("static methods", function()
   {
     it("should create a new Retain instance without error", function(done)
@@ -26,7 +24,6 @@ describe("Retain", function()
       B._records.should.have.length(0);
 
       done();
-
     });
 
     it("should create a Retain instance with attributes",function(done)
@@ -52,10 +49,7 @@ describe("Retain", function()
       done();
 
     });
-  });
 
-  describe("instance methods", function()
-  {
     it("should create a new record", function(done)
     {
       var fightClub = Movie.new();
@@ -64,14 +58,34 @@ describe("Retain", function()
       done();
     });
 
-    it("should set and get a property", function(done)
+    it("should create a new record remotelly", function(done)
+    {
+      var fightClub = Movie.new(null, function(record)
+      {
+        record.should.have.property("get")
+        done();
+      })
+
+    });
+
+    it("should set a property", function(done)
     {
       var goodFellas = Movie.new();
-      goodFellas.set("name", "Goodfellas")
+      goodFellas.set({"name": "Goodfellas"})
 
       assert.equal(goodFellas.get("name"), "Goodfellas");
 
       done();
+    });
+
+    it("should set a property remotelly", function(done)
+    {
+      var goodFellas = Movie.new();
+      goodFellas.set({"name": "Goodfellas"}, function(record)
+      {
+        assert.equal(record.get("name"), "Goodfellas");
+        done();
+      })
     });
 
     it("should validate the record attributes at creation", function(done)
@@ -94,7 +108,7 @@ describe("Retain", function()
     {
       var pulpFiction = Movie.new()
 
-      pulpFiction.set("name", "Pulp Fiction");
+      pulpFiction.set({"name":"Pulp Fiction"});
 
       assert.equal(pulpFiction.get("name"), "Pulp Fiction");
 
@@ -109,26 +123,39 @@ describe("Retain", function()
       done();
     });
 
-    it("should use the promise",function(done)
+    it("should return all the movies",function(done)
     {
-      var v = Movie.new();
-      v.set("name","V")
-
-      console.log(Movie.all().length);
-      Movie.p.all().then(function(data)
-      {
-        console.log(data.length);
-      })
-
-      // Save always return a promise
-      v.save().then(function(record)
-      {
-        console.log(record.get("name"));
-      })
-
+      assert.equal(Movie.all().length, 6);
       done();
     });
 
+    it("should return all the movies remotelly",function(done)
+    {
+      Movie.all(function(records)
+      {
+        assert.equal(records.length, 6);
+        done();
+      })
+
+    });
+
+    it("should get movie by cid",function(done)
+    {
+      record = Movie.find(2);
+      assert.equal(record.get("name"), "Goodfellas");
+      done();
+    });
+
+    it("should get movie by id remotelly",function(done)
+    {
+      Movie.find(2, function(id)
+      {
+        record =  Movie.find(2);
+        assert.equal(record.get("name"), "Goodfellas");
+        done();
+      });
+    });
+    
   });
 
 })
