@@ -60,7 +60,7 @@ describe("Retain", function()
 
     it("should create a new record remotelly", function(done)
     {
-      var fightClub = Movie.new(null, function(record)
+      var fightClub = Movie.new(function(record)
       {
         record.should.have.property("get")
         done();
@@ -88,22 +88,6 @@ describe("Retain", function()
       })
     });
 
-    it("should validate the record attributes at creation", function(done)
-    {
-      var wakingLife = Movie.new({
-        name:"Waking Life", 
-        watched: true,
-        duration: 99,
-        categories: ["Animation", "Drama"], 
-        info: {director:"Richard Linklater", writer:"Richard Linklater"},
-        year: new Date(2001, 4, 12)
-      });
-
-      assert.equal(wakingLife.get("name"), "Waking Life");
-
-      done();
-    });
-
     it("should validate the record attributes after creation", function(done)
     {
       var pulpFiction = Movie.new()
@@ -125,7 +109,7 @@ describe("Retain", function()
 
     it("should return all the movies",function(done)
     {
-      assert.equal(Movie.all().length, 6);
+      assert.equal(Movie.all().length, 5);
       done();
     });
 
@@ -133,7 +117,7 @@ describe("Retain", function()
     {
       Movie.all(function(records)
       {
-        assert.equal(records.length, 6);
+        assert.equal(records.length, 5);
         done();
       })
 
@@ -155,7 +139,7 @@ describe("Retain", function()
         done();
       });
     });
-    
+
   });
 
 })
