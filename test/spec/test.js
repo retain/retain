@@ -1,6 +1,7 @@
 var retain = require("../../lib/index");
 var should = require("chai").should();
 var assert = require("chai").assert;
+var expect = require('chai').expect
 
 describe("Retain", function()
 {
@@ -68,13 +69,43 @@ describe("Retain", function()
 
     });
 
-    it("should set a property", function(done)
+    it("should set all the properties", function(done)
     {
       var goodFellas = Movie.new();
-      goodFellas.set({"name": "Goodfellas"})
+      goodFellas.set({
+        "name": "Goodfellas",
+        "watched": true,
+        "duration": 146,
+        "categories":["crime", "drama"],
+        "info":{director:"Martin Scorsese", writers:["Nicholas Pileggi", "Martin Scorsese"]},
+        "year": new Date("19 September 1990")
+      })
 
       assert.equal(goodFellas.get("name"), "Goodfellas");
 
+      done();
+    });
+
+    it("should set a property different than the attributes", function(done)
+    {
+      var goodFellas = Movie.new();
+      goodFellas.set({"_id": "000"})
+
+      assert.equal(goodFellas["_id"], "000");
+
+      done();
+    });
+
+    it("should thrown an error if property is not valid", function(done)
+    {
+      var goodFellas = Movie.new();
+
+      var fn = function()
+      {
+        goodFellas.set({"name": 0})
+      }
+
+      expect(fn).to.throw(Error);
       done();
     });
 
@@ -109,7 +140,7 @@ describe("Retain", function()
 
     it("should return all the movies",function(done)
     {
-      assert.equal(Movie.all().length, 5);
+      assert.equal(Movie.all().length, 7);
       done();
     });
 
@@ -117,7 +148,7 @@ describe("Retain", function()
     {
       Movie.all(function(records)
       {
-        assert.equal(records.length, 5);
+        assert.equal(records.length, 7);
         done();
       })
 
