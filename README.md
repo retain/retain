@@ -9,10 +9,10 @@ Javascript Model based on promises with plugins support
 ``` javascript
 
 var ajax_plugin = require("ajax-plugin")
-var Retain = require("./index")
+var retain = require("./index")
 
 // Create a new Retain model
-var Movie = Retain.extend();
+var Movie = retain();
 
 // Set the model attributes with its type (for validation purpose)
 Movie.attrs({
@@ -21,7 +21,7 @@ Movie.attrs({
 
 // Set the ajax_plugin to be used by the Model
 // Each plugin might have its own configuration
-Movie.use(ajax_plugin, { 
+Movie.use(ajax_plugin, {
   rest_url: "/record"
 })
 
