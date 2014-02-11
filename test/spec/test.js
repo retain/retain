@@ -171,6 +171,26 @@ describe("Retain", function()
       });
     });
 
+    it("should delete the movie",function(done)
+    {
+      var total = Movie.all().length;
+      record = Movie.find(2);
+      record.remove();
+      assert.equal(total -1, Movie.all().length);
+      done();
+    });
+
+    it("should delete the movie remotelly",function(done)
+    {
+      var total = Movie.all().length;
+      record = Movie.find(1);
+      record.remove(function()
+        {
+          assert.equal(total -1, Movie.all().length);
+          done();
+        });
+    });
+
   });
 
 })
