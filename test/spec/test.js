@@ -5,7 +5,7 @@ var expect = require('chai').expect
 
 describe("Retain", function()
 {
-  var Movie = retain.extend();
+  var Movie = retain();
 
   describe("static methods", function()
   {
@@ -17,11 +17,11 @@ describe("Retain", function()
 
     it("shoudl create 2 different instances of Retain",function(done)
     {
-      var A = retain.extend();
+      var A = retain();
       A.new()
       A._records.should.have.length(1);
 
-      var B = retain.extend();
+      var B = retain();
       B._records.should.have.length(0);
 
       done();
