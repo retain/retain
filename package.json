@@ -2,7 +2,7 @@
   "name": "retain",
   "version": "0.1.0",
   "description": "Javascript Model based on promises with plugins support",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "npm test"
   },
