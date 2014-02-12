@@ -125,4 +125,4 @@ fightClub.remove(function(record, err)
 });
 ```
 
-For more info, checkout the [docs](asdasd)
+For more info, checkout the [__docs__](http://rawgithub.com/giuliandrimba/retain/master/docs/classes/Retain.html)
