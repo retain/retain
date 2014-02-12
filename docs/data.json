@@ -1,0 +1,235 @@
+{
+    "project": {},
+    "files": {
+        "lib/index.js": {
+            "name": "lib/index.js",
+            "modules": {},
+            "classes": {
+                "Retain": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {
+        "Retain": {
+            "name": "Retain",
+            "shortname": "Retain",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "lib/index.js",
+            "line": 12,
+            "description": "Retain is a browser (CJS) and node Javascript model with plugins support.",
+            "is_constructor": 1,
+            "example": [
+                "\n ```\n var retain = require(\"retain\");\n\n Movies = retain();\n\n //If you want to extend from Retain in Coffescript:\n \n class Movies extends retain.Retain\n\n ```"
+            ]
+        }
+    },
+    "classitems": [
+        {
+            "file": "lib/index.js",
+            "line": 66,
+            "description": "Changes the name of the 'ID' property.",
+            "itemtype": "attribute",
+            "name": "id_prop",
+            "example": [
+                "\n ```\n   Movies.id_prop = \"_id\"; // Useful when working with data coming from MongoDB (it uses '_id')\n ```"
+            ],
+            "class": "Retain"
+        },
+        {
+            "file": "lib/index.js",
+            "line": 77,
+            "description": "Adds a plugin middleware to the Model",
+            "itemtype": "method",
+            "name": "use",
+            "static": 1,
+            "params": [
+                {
+                    "name": "plugin",
+                    "description": "Retain plugin middleware",
+                    "type": "Object"
+                },
+                {
+                    "name": "config",
+                    "description": "Plugin's configuration object",
+                    "type": "Object"
+                }
+            ],
+            "example": [
+                "\n ```\n   Movie.use(plugin_name, {\n     url:\"/movies\"\n   })\n ```"
+            ],
+            "class": "Retain"
+        },
+        {
+            "file": "lib/index.js",
+            "line": 104,
+            "description": "Define the model attributes and the attributes type.",
+            "itemtype": "method",
+            "name": "attrs",
+            "static": 1,
+            "params": [
+                {
+                    "name": "props",
+                    "description": "Object containing the attributes and types as key:values.",
+                    "type": "Object"
+                }
+            ],
+            "example": [
+                "\n ```\n   Movie.attrs({\n     name:String,\n     watched:Boolean,\n     duration: Number,\n     categories: Array,\n     info: Object,\n     year: Date\n   })\n ```"
+            ],
+            "class": "Retain"
+        },
+        {
+            "file": "lib/index.js",
+            "line": 130,
+            "description": "Creates a new model instance locally.\nIf a callback were suplied, and there is at least one plugin attached to the model, creates the record remotelly.",
+            "itemtype": "method",
+            "name": "new",
+            "static": 1,
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "If suplied, it will be called when record was saved locally.",
+                    "type": "Function",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "Model instance.",
+                "type": "Object"
+            },
+            "example": [
+                "\n ```\n   var godfather = Movies.new() //Creates the record locally\n   var godfatherRemote = Movies.new(function(movie, err)\n   {\n     //Creates the record locally, and remotelly (if there is any plugin attached)\n   })\n ```"
+            ],
+            "class": "Retain"
+        },
+        {
+            "file": "lib/index.js",
+            "line": 162,
+            "description": "Sets the model instance properties locally.\n\nIf a callback were suplied, and there is at least one plugin attached to the model, updates the record remotelly.",
+            "itemtype": "method",
+            "name": "set",
+            "params": [
+                {
+                    "name": "props",
+                    "description": "The properties to be setted/updated.",
+                    "type": "Object"
+                },
+                {
+                    "name": "callback",
+                    "description": "If suplied, it will be called when the record was saved remotelly.",
+                    "type": "Function",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "Model instance updated.",
+                "type": "Object"
+            },
+            "example": [
+                "\n ```\n   var factotum = Movies.new(function(movie, err)\n   {\n     //Creates the record locally and remotelly\n   })\n\n   factotum.set({name:\"Factotum\", watched: false}) // Updates the record locally\n   factotum.set({name:\"Factotum\", watched: false}, function()\n   {\n     // Updates the record remotelly.\n   });\n\n ```"
+            ],
+            "class": "Retain"
+        },
+        {
+            "file": "lib/index.js",
+            "line": 201,
+            "description": "Get the value of a property.",
+            "itemtype": "method",
+            "name": "get",
+            "params": [
+                {
+                    "name": "prop",
+                    "description": "The property to be retrieved.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The property value."
+            },
+            "example": [
+                "\n ```\n   factotum.set({name:\"Factotum\", watched: false}) // Updates the record locally\n   \n   var name = factotum.get(\"name\") //Returns 'Factotum'\n\n ```"
+            ],
+            "class": "Retain"
+        },
+        {
+            "file": "lib/index.js",
+            "line": 220,
+            "description": "Finds a model instance based on the CID or ID.\n\nIf a callback were suplied, and there is at least one plugin attached to the model, finds the record remotelly.",
+            "itemtype": "method",
+            "name": "find",
+            "static": 1,
+            "params": [
+                {
+                    "name": "id",
+                    "description": "Instance CID or ID.",
+                    "type": "Number"
+                },
+                {
+                    "name": "callback",
+                    "description": "If suplied, it will be called when the remote record was retrieved.",
+                    "type": "Function",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "Record found.",
+                "type": "Object"
+            },
+            "example": [
+                "\n ```\n   var eyesWideShut = Movies.new();\n   \n   Movies.find(0) // Returns a model instance (eyesWideShut)\n\n   // Searchs remotelly for a recod with the ID of 2\n   Movies.find(2, function(movie, err)\n   {\n     \n   });\n\n ```"
+            ],
+            "class": "Retain"
+        },
+        {
+            "file": "lib/index.js",
+            "line": 273,
+            "description": "Get all the model instances\n\nIf a callback were suplied, and there is at least one plugin attached to the model, fetch the records remotelly.",
+            "itemtype": "method",
+            "name": "all",
+            "static": 1,
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "If suplied, it will be called when the remote records were fetched.",
+                    "type": "Function",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "Array of records.",
+                "type": "Array"
+            },
+            "example": [
+                "\n ```\n   Movies.all() // Returns the locally records\n\n   Movies.all(function(records, err)\n   {\n     // Returns the remote records\n   })\n\n ```"
+            ],
+            "class": "Retain"
+        },
+        {
+            "file": "lib/index.js",
+            "line": 298,
+            "description": "Removes/deletes the record locally.\n\nIf a callback were suplied, and there is at least one plugin attached to the model, removes the record remotelly.",
+            "itemtype": "method",
+            "name": "find",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "If suplied, it will be called when the record was removed/deleted remotelly.",
+                    "type": "Function",
+                    "optional": true
+                }
+            ],
+            "example": [
+                "\n ```\n   var eyesWideShut = Movies.new(function()\n   {\n     // Creates a new record remotelly\n   });\n   \n   eyesWideShut.remove() // Removes/deletes the record locally\n\n   eyesWideShut.remove(function(movie, err)\n   {\n     // Removes/deletes the record remotelly.\n   })\n\n ```"
+            ],
+            "class": "Retain"
+        }
+    ],
+    "warnings": []
+}

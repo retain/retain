@@ -1,3 +1,6 @@
+.PHONY: docs
+
+YUIDOC=node_modules/yuidocjs/lib/cli.js
 TESTS = test/spec
 REPORTER = spec
 MOCHA = ./node_modules/mocha/bin/mocha
@@ -19,3 +22,9 @@ coveralls:
 
 clean:
 	rm -rf ./coverage
+
+docs:
+	$(YUIDOC) -o ./docs ./lib
+
+docs.server:
+	$(YUIDOC) -o ./docs --server ./lib

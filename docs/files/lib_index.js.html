@@ -1,7 +1,95 @@
-"use strict"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>lib/index.js</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
 
-var Q = require("q");
-var happens = require("happens");
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title=""></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/Retain.html">Retain</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: lib/index.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&quot;use strict&quot;
+
+var Q = require(&quot;q&quot;);
+var happens = require(&quot;happens&quot;);
 
 module.exports = function(){
   return Retain.extend();
@@ -15,8 +103,8 @@ module.exports.Retain = Retain;
 * @class Retain
 * @constructor
 * @example
-  ```
-  var retain = require("retain");
+  &#x60;&#x60;&#x60;
+  var retain = require(&quot;retain&quot;);
 
   Movies = retain();
 
@@ -24,7 +112,7 @@ module.exports.Retain = Retain;
   
   class Movies extends retain.Retain
 
-  ```
+  &#x60;&#x60;&#x60;
 */
 
 function Retain()
@@ -64,15 +152,15 @@ Retain.extend = function()
 Retain._plugins = []
 
 /**
-* Changes the name of the 'ID' property.
+* Changes the name of the &#x27;ID&#x27; property.
 *
 * @attribute id_prop 
 * @example
-  ```
-    Movies.id_prop = "_id"; // Useful when working with data coming from MongoDB (it uses '_id')
-  ```
+  &#x60;&#x60;&#x60;
+    Movies.id_prop = &quot;_id&quot;; // Useful when working with data coming from MongoDB (it uses &#x27;_id&#x27;)
+  &#x60;&#x60;&#x60;
 */
-Retain.id_prop = "id";
+Retain.id_prop = &quot;id&quot;;
 
 /**
 * Adds a plugin middleware to the Model
@@ -80,13 +168,13 @@ Retain.id_prop = "id";
 * @method use
 * @static
 * @param {Object} plugin Retain plugin middleware
-* @param {Object} config Plugin's configuration object
+* @param {Object} config Plugin&#x27;s configuration object
 * @example
-  ```
+  &#x60;&#x60;&#x60;
     Movie.use(plugin_name, {
-      url:"/movies"
+      url:&quot;/movies&quot;
     })
-  ```
+  &#x60;&#x60;&#x60;
 */
 
 Retain.use = function(plugin, config)
@@ -108,7 +196,7 @@ Retain.use = function(plugin, config)
 * @static
 * @param {Object} props Object containing the attributes and types as key:values.
 * @example
-  ```
+  &#x60;&#x60;&#x60;
     Movie.attrs({
       name:String,
       watched:Boolean,
@@ -117,7 +205,7 @@ Retain.use = function(plugin, config)
       info: Object,
       year: Date
     })
-  ```
+  &#x60;&#x60;&#x60;
 */
 Retain.attrs = function(props)
 {
@@ -136,13 +224,13 @@ Retain.attrs = function(props)
 * @param {Function} [callback] If suplied, it will be called when record was saved locally.
 * @return {Object} Model instance.
 * @example
-  ```
+  &#x60;&#x60;&#x60;
     var godfather = Movies.new() //Creates the record locally
     var godfatherRemote = Movies.new(function(movie, err)
     {
       //Creates the record locally, and remotelly (if there is any plugin attached)
     })
-  ```
+  &#x60;&#x60;&#x60;
 */
 Retain.new = function (callback)
 {
@@ -154,7 +242,7 @@ Retain.new = function (callback)
 
   this._records.push(record);
 
-  this._run_plugins("new", record, callback);
+  this._run_plugins(&quot;new&quot;, record, callback);
 
   return record;
 }
@@ -169,31 +257,31 @@ Retain.new = function (callback)
 * @param {Function} [callback] If suplied, it will be called when the record was saved remotelly.
 * @return {Object} Model instance updated.
 * @example
-  ```
+  &#x60;&#x60;&#x60;
     var factotum = Movies.new(function(movie, err)
     {
       //Creates the record locally and remotelly
     })
 
-    factotum.set({name:"Factotum", watched: false}) // Updates the record locally
-    factotum.set({name:"Factotum", watched: false}, function()
+    factotum.set({name:&quot;Factotum&quot;, watched: false}) // Updates the record locally
+    factotum.set({name:&quot;Factotum&quot;, watched: false}, function()
     {
       // Updates the record remotelly.
     });
 
-  ```
+  &#x60;&#x60;&#x60;
 */
 Retain.prototype.set = function(props, callback)
 {
 
-  var args = 1 <= props.length ? [].slice.call(props, 0) : [];
+  var args = 1 &lt;= props.length ? [].slice.call(props, 0) : [];
 
   for(var prop in props)
   {
     this._validate_prop(prop, props[prop]);
   }
 
-  this.constructor._run_plugins("set", this, callback);
+  this.constructor._run_plugins(&quot;set&quot;, this, callback);
 
   return this;
 }
@@ -205,12 +293,12 @@ Retain.prototype.set = function(props, callback)
 * @param {String} prop The property to be retrieved.
 * @return The property value.
 * @example
-  ```
-    factotum.set({name:"Factotum", watched: false}) // Updates the record locally
+  &#x60;&#x60;&#x60;
+    factotum.set({name:&quot;Factotum&quot;, watched: false}) // Updates the record locally
     
-    var name = factotum.get("name") //Returns 'Factotum'
+    var name = factotum.get(&quot;name&quot;) //Returns &#x27;Factotum&#x27;
 
-  ```
+  &#x60;&#x60;&#x60;
 */
 Retain.prototype.get = function(prop)
 {
@@ -227,7 +315,7 @@ Retain.prototype.get = function(prop)
 * @param {Function} [callback] If suplied, it will be called when the remote record was retrieved.
 * @return {Object} Record found.
 * @example
-  ```
+  &#x60;&#x60;&#x60;
     var eyesWideShut = Movies.new();
     
     Movies.find(0) // Returns a model instance (eyesWideShut)
@@ -238,7 +326,7 @@ Retain.prototype.get = function(prop)
       
     });
 
-  ```
+  &#x60;&#x60;&#x60;
 */
 Retain.find = function(id, callback)
 {
@@ -246,7 +334,7 @@ Retain.find = function(id, callback)
   var record = {id:id};
 
   // Search by ID
-  for(var i = 0, total = this._records.length; i < total; i++)
+  for(var i = 0, total = this._records.length; i &lt; total; i++)
   {
     if(this._records[i][this.id_prop] === id)
     {
@@ -255,9 +343,9 @@ Retain.find = function(id, callback)
   }
 
   // Search by CID
-  for(i = 0; i < total; i++)
+  for(i = 0; i &lt; total; i++)
   {
-    if(this._records[i]["_cid"] === id && !found)
+    if(this._records[i][&quot;_cid&quot;] === id &amp;&amp; !found)
     {
       found = this._records[i];
     }
@@ -266,7 +354,7 @@ Retain.find = function(id, callback)
   if(found)
     record = found;
 
-  this._run_plugins("find", record, callback);
+  this._run_plugins(&quot;find&quot;, record, callback);
   return found;
 }
 
@@ -279,7 +367,7 @@ Retain.find = function(id, callback)
 * @param {Function} [callback] If suplied, it will be called when the remote records were fetched.
 * @return {Array} Array of records.
 * @example
-  ```
+  &#x60;&#x60;&#x60;
     Movies.all() // Returns the locally records
 
     Movies.all(function(records, err)
@@ -287,11 +375,11 @@ Retain.find = function(id, callback)
       // Returns the remote records
     })
 
-  ```
+  &#x60;&#x60;&#x60;
 */
 Retain.all = function(callback)
 {
-  this._run_plugins("all", this._records, callback);
+  this._run_plugins(&quot;all&quot;, this._records, callback);
   return this._records;
 }
 
@@ -302,7 +390,7 @@ Retain.all = function(callback)
 * @method find
 * @param {Function} [callback] If suplied, it will be called when the record was removed/deleted remotelly.
 * @example
-  ```
+  &#x60;&#x60;&#x60;
     var eyesWideShut = Movies.new(function()
     {
       // Creates a new record remotelly
@@ -315,14 +403,14 @@ Retain.all = function(callback)
       // Removes/deletes the record remotelly.
     })
 
-  ```
+  &#x60;&#x60;&#x60;
 */
 Retain.prototype.remove = function(callback)
 {
   var cid = this._cid;
   var record = null;
 
-  for(var i = 0, total = this.constructor._records.length -1; i < total; i++)
+  for(var i = 0, total = this.constructor._records.length -1; i &lt; total; i++)
   {
     record = this.constructor._records[i];
 
@@ -332,7 +420,7 @@ Retain.prototype.remove = function(callback)
     }
   }
 
-  this.constructor._run_plugins("remove", this, callback);
+  this.constructor._run_plugins(&quot;remove&quot;, this, callback);
 }
 
 // Private
@@ -348,13 +436,13 @@ Retain._run_plugins = function(method, initialValue, callback)
     plugins.reduce(Q.when, Q(initialValue))
       .then(function(res)
       {
-        self.emit("change", res);
+        self.emit(&quot;change&quot;, res);
         self.emit(method, res);
         callback(res,null);
       })
       .fail(function(err)
       {
-        self.emit("error", res);
+        self.emit(&quot;error&quot;, res);
         callback(null,err)
       });
   }
@@ -370,7 +458,7 @@ Retain._get_plugins = function(method)
 {
   var promises = [];
 
-  for(var i = 0, total = this._plugins.length; i < total; i++)
+  for(var i = 0, total = this._plugins.length; i &lt; total; i++)
   {
     if(this._plugins[i][method])
     {
@@ -393,18 +481,18 @@ Retain.prototype._validate_type = function(prop, val)
   {
     switch(attr.toString().match(/function\s(\w+)/)[1])
     {
-      case "String":
-        return (typeof val === "string");
+      case &quot;String&quot;:
+        return (typeof val === &quot;string&quot;);
         break;
-      case "Boolean":
-        return (typeof val === "boolean");
+      case &quot;Boolean&quot;:
+        return (typeof val === &quot;boolean&quot;);
         break;
-      case "Number":
-        return (typeof val === "number");
+      case &quot;Number&quot;:
+        return (typeof val === &quot;number&quot;);
         break;
-      case "Array":
-      case "Object":
-      case "Date":
+      case &quot;Array&quot;:
+      case &quot;Object&quot;:
+      case &quot;Date&quot;:
         return (val instanceof attr);
         break;
     }
@@ -421,7 +509,7 @@ Retain.prototype._validate_prop = function(prop, value)
     }
     else
     {
-      throw new Error("Invalid type for property " + prop + " = " + value);
+      throw new Error(&quot;Invalid type for property &quot; + prop + &quot; = &quot; + value);
     }
   }
   else
@@ -429,3 +517,23 @@ Retain.prototype._validate_prop = function(prop, value)
     this[prop] = value;
   }
 }
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

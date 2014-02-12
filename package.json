@@ -30,6 +30,7 @@
     "coveralls": "~2.6.1",
     "mocha": "~1.17.0",
     "chai": "~1.8.1",
-    "istanbul": "~0.2.3"
+    "istanbul": "~0.2.3",
+    "yuidocjs": "~0.3.47"
   }
 }
