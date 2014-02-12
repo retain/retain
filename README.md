@@ -14,8 +14,7 @@ $ npm install retain
 
 There are many Javascripts models out there, but the majority of them are deeply coupled inside a framework, thus making it ~~impossible~~ hard to use them in another project/environment.
 
-###Example
-
+### Initialize
 Loads __retain__ and a __retain-ajax__ (plugin that saves the records in webservices).
 
 ``` javascript
@@ -27,6 +26,16 @@ Creates a new Retain instance.
 ``` javascript
 var Movies = retain();
 ```
+
+For __Coffeescript__ lovers, you can extend __Retain__ like this:
+``` coffeescript
+retain = require "retain"
+
+class Movies extends retain.Retain
+
+```
+
+### Usage
 
 Set the model attributes with its type (for validation purposes)
 ``` javascript
@@ -125,4 +134,91 @@ fightClub.remove(function(record, err)
 });
 ```
 
-For more info, checkout the [__docs__](http://rawgithub.com/giuliandrimba/retain/master/docs/classes/Retain.html)
+#### For more info, checkout the [__docs__](http://rawgithub.com/giuliandrimba/retain/master/docs/classes/Retain.html).
+
+## Plugins
+
+★ List of avaliable plugins:
+* [retain-ajax](https://github.com/giuliandrimba/retain-ajax) [![Build Status](https://travis-ci.org/giuliandrimba/retain-ajax.png?branch=master)](https://travis-ci.org/giuliandrimba/retain-ajax) [![Coverage Status](https://coveralls.io/repos/giuliandrimba/retain-ajax/badge.png)](https://coveralls.io/r/giuliandrimba/retain-ajax)
+
+### Creating a plugin
+
+Retain use Promises internally to transfer data between the plugins.
+
+To create a plugin, it is necessary to implement each of the following __Retain__ methods.
+
+* __new__
+* __all__
+* __set__
+* __find__
+* __remove__
+
+Each of theses methods must return a promise.
+
+__Example of a custom plugin:__
+
+> This is just an example, saving the records locally.
+
+``` javascript
+var Q = require("q");
+
+var records = [];
+
+module.exports = function()
+{
+  return {
+    new:function(record)
+    {
+      records.push(record);
+      return Q(record);
+    },
+    all:function(records)
+    {
+      return Q(records);
+    },
+    set:function(record)
+    {
+      for(var i = 0, total = records.length; i < total; i++)
+      {
+        if(record.id === records[i].id)
+        {
+          records[i] = record;
+        }
+      }
+      
+      return Q(record);
+    },
+    find:(record)
+    {
+      var found = null;
+      
+      for(var i = 0, total = records.length; i < total; i++)
+      {
+        if(record.id === records[i].id)
+        {
+          found = records[i];
+        }
+      }
+      
+      return Q(found);
+    },
+    remove:function(record)
+    {
+      for(var i = 0, total = records.length; i < total; i++)
+      {
+        if(record.id === records[i].id)
+        {
+          records.splice(i,1);
+        }
+      }
+      
+      return Q(null);
+    }
+  }
+}
+
+```
+
+
+
+
