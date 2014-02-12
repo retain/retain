@@ -1,11 +1,21 @@
-Retain
-====
+# Retain
 
-Javascript Model based on promises with plugins support
+Retain is a __browser__ (CJS) and __node__ Javascript model with plugins support.
 
 [![Build Status](https://travis-ci.org/giuliandrimba/retain.png?branch=master)](https://travis-ci.org/giuliandrimba/retain) [![Coverage Status](https://coveralls.io/repos/giuliandrimba/retain/badge.png?branch=master)](https://coveralls.io/r/giuliandrimba/retain?branch=master)
 
+## Installation
+
+```
+$ npm install retain
+```
+
+## Motivation
+
+There are many Javascripts models out there, but the majority of them are deeply coupled inside a framework, thus making it ~~impossible~~ hard to use them in another project/environment.
+
 ###Usage
+
 ``` javascript
 
 var ajax_plugin = require("ajax-plugin")
