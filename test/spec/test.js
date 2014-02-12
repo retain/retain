@@ -153,9 +153,9 @@ describe("Retain", function()
 
     it("should return all the movies remotelly",function(done)
     {
-      Movie.all(function(records)
+      Movie.all(function(res, err)
       {
-        assert.equal(records.length, 7);
+        assert.equal(res.length, 7);
         done();
       })
 
@@ -170,7 +170,7 @@ describe("Retain", function()
 
     it("should get movie by id remotelly",function(done)
     {
-      Movie.find(2, function(id)
+      Movie.find(2, function(res, err)
       {
         record =  Movie.find(2);
         assert.equal(record.get("name"), "Goodfellas");
@@ -191,12 +191,25 @@ describe("Retain", function()
     {
       var total = Movie.all().length;
       record = Movie.find(1);
-      record.remove(function()
+      record.remove(function(res, err)
         {
           assert.equal(total -1, Movie.all().length);
           done();
         });
     });
+
+    it("should listen to an event", function(done)
+    {
+      Movie.on("new", function(record)
+      {
+        done();
+      })
+
+      var movie = Movie.new(function(res, err)
+      {
+        // DONE
+      })
+    })
 
   });
 

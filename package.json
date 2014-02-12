@@ -1,6 +1,6 @@
 {
   "name": "retain",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Javascript Model based on promises with plugins support",
   "main": "lib/index.js",
   "scripts": {
@@ -23,7 +23,8 @@
   },
   "homepage": "https://github.com/giuliandrimba/retain",
   "dependencies": {
-    "q": "~1.0.0"
+    "q": "~1.0.0",
+    "happens": "~0.4.0"
   },
   "devDependencies": {
     "coveralls": "~2.6.1",
