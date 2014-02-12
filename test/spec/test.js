@@ -1,4 +1,5 @@
 var retain = require("../../lib/index");
+var plugin = require("../fixtures/plugin");
 var should = require("chai").should();
 var assert = require("chai").assert;
 var expect = require('chai').expect
@@ -7,7 +8,7 @@ describe("Retain", function()
 {
   var Movie = retain();
 
-  describe("static methods", function()
+  describe("API", function()
   {
     it("should create a new Retain instance without error", function(done)
     {
@@ -49,6 +50,12 @@ describe("Retain", function()
 
       done();
 
+    });
+
+    it("should use a plugin", function(done)
+    {
+      Movie.use(plugin, {});
+      done();
     });
 
     it("should create a new record", function(done)

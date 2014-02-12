@@ -1,6 +1,6 @@
 {
   "name": "retain",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Javascript Model based on promises with plugins support",
   "main": "lib/index.js",
   "scripts": {
