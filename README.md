@@ -15,11 +15,10 @@ $ npm install retain
 There are many Javascripts models out there, but the majority of them are deeply coupled inside a framework, thus making it ~~impossible~~ hard to use them in another project/environment.
 
 ### Initialize
-Loads __retain__ and a __retain-ajax__ (plugin that saves the records in webservices).
+Loads __retain__
 
 ``` javascript
 var retain = require("retain")
-var retainAjax = require("retain-ajax")
 ```
 
 Creates a new Retain instance.
@@ -45,9 +44,11 @@ Movie.attrs({
 })
 ```
 
-Inject __retainAjax__ plugin to be used by the Model.
+Inject __retainAjax__ (plugin that saves the records in webservices).
 Each plugin might have its own configuration.
 ``` javascript
+var retainAjax = require("retain-ajax")
+
 Movie.use(retainAjax, {
   url: "/movies"
 })
