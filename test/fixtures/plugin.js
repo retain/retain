@@ -2,10 +2,19 @@ var Q = require("q");
 
 module.exports = function()
 {
-  return {
+  var plugin = {
     new:function(record)
     {
-      return Q(record);
+      var deferred = Q.defer();
+      if(plugin.config.error) 
+      {
+        deferred.reject({error:"error"});
+      } 
+      else 
+      {
+        deferred.resolve(record);
+      }
+      return deferred.promise;
     },
     set:function(record)
     {
@@ -21,4 +30,6 @@ module.exports = function()
     },
     config:{}
   };
+
+  return plugin;
 }

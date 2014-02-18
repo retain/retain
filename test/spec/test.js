@@ -260,6 +260,17 @@ describe("Retain", function()
       });
     })
 
+    it("should throw an error when a plugin fails",function(done)
+    {
+      Movie.use(plugin, {error:true});
+
+      var scarface = Movie.new(function(record, err)
+      {
+        if(err)
+          done()
+      });
+    })
+
   });
 
 })
