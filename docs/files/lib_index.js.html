@@ -217,7 +217,7 @@ Retain.attrs = function(props)
 
 /**
 * Creates a new model instance locally.
-* If a callback were suplied, and there is at least one plugin attached to the model, creates the record remotelly.
+* If a callback is suplied, and there is at least one plugin attached to the model, creates the record remotelly.
 *
 * @method new
 * @static
@@ -250,7 +250,7 @@ Retain.new = function (callback)
 /**
 * Sets the model instance properties locally.
 *
-* If a callback were suplied, and there is at least one plugin attached to the model, updates the record remotelly.
+* If a callback is suplied, and there is at least one plugin attached to the model, updates the record remotelly.
 *
 * @method set
 * @param {Object} props The properties to be setted/updated.
@@ -308,7 +308,7 @@ Retain.prototype.get = function(prop)
 /**
 * Finds a model instance based on the CID or ID.
 *
-* If a callback were suplied, and there is at least one plugin attached to the model, finds the record remotelly.
+* If a callback is suplied, and there is at least one plugin attached to the model, finds the record remotelly.
 * @method find
 * @static
 * @param {Number} id Instance CID or ID.
@@ -336,7 +336,7 @@ Retain.find = function(id, callback)
   // Search by ID
   for(var i = 0, total = this._records.length; i &lt; total; i++)
   {
-    if(this._records[i][this.id_prop] === id)
+    if(parseInt(this._records[i][this.id_prop]) === id)
     {
       found = this._records[i];
     }
@@ -345,7 +345,7 @@ Retain.find = function(id, callback)
   // Search by CID
   for(i = 0; i &lt; total; i++)
   {
-    if(this._records[i][&quot;_cid&quot;] === id &amp;&amp; !found)
+    if(parseInt(this._records[i][&quot;_cid&quot;]) === id &amp;&amp; !found)
     {
       found = this._records[i];
     }
@@ -361,7 +361,7 @@ Retain.find = function(id, callback)
 /**
 * Get all the model instances
 *
-* If a callback were suplied, and there is at least one plugin attached to the model, fetch the records remotelly.
+* If a callback is suplied, and there is at least one plugin attached to the model, fetch the records remotelly.
 * @method all
 * @static
 * @param {Function} [callback] If suplied, it will be called when the remote records were fetched.
@@ -386,7 +386,7 @@ Retain.all = function(callback)
 /**
 * Removes/deletes the record locally.
 *
-* If a callback were suplied, and there is at least one plugin attached to the model, removes the record remotelly.
+* If a callback is suplied, and there is at least one plugin attached to the model, removes the record remotelly.
 * @method find
 * @param {Function} [callback] If suplied, it will be called when the record was removed/deleted remotelly.
 * @example
@@ -409,6 +409,7 @@ Retain.prototype.remove = function(callback)
 {
   var cid = this._cid;
   var record = null;
+  var array = this.constructor._records;
 
   for(var i = 0, total = this.constructor._records.length -1; i &lt; total; i++)
   {
@@ -423,7 +424,92 @@ Retain.prototype.remove = function(callback)
   this.constructor._run_plugins(&quot;remove&quot;, this, callback);
 }
 
+/**
+* Sync the local record with the remote storages.
+*
+* If a callback is suplied, and there is at least one plugin attached to the model, syncs the record remotelly.
+* @method save
+* @param {Function} [callback] If suplied, it will be called when the record was synchronized remotelly.
+* @example
+  &#x60;&#x60;&#x60;
+    var graveOfTheFireflies = Movie.new();
+    
+    graveOfTheFireflies.set({name:&quot;Grave of the Fireflies&quot;});
+
+    graveOfTheFireflies.save(function()
+    {
+      done();
+    });
+
+  &#x60;&#x60;&#x60;
+*/
+Retain.prototype.save = function(callback)
+{
+  var that = this;
+
+  if(this._isNew() &amp;&amp; !this._isRemoved())
+  {
+    that.constructor._run_plugins(&quot;new&quot;, that, function()
+    {
+      var keys = Object.keys(that._keys);
+
+      if(keys.length)
+      {
+        that.constructor._run_plugins(&quot;set&quot;, that, function()
+        {
+          if(callback)
+          {
+            callback()
+            return;
+          }
+        });
+      }
+      else
+      {
+        if(callback)
+        {
+          callback()
+          return;
+        }
+      }
+
+    });
+  }
+  else if(!this._isRemoved())
+  {
+    that.constructor._run_plugins(&quot;set&quot;, that, function()
+    {
+      if(callback)
+        callback()
+    });
+  }
+  else
+  {
+    if(callback)
+      callback()
+  }
+}
+
+
 // Private
+
+Retain.prototype._isRemoved = function()
+{
+  var found = this.constructor.find(this.cid);
+
+  if(found)
+    return false;
+  else
+    return true;
+}
+
+Retain.prototype._isNew = function()
+{
+  if(this.id === undefined)
+    return true;
+  else
+    return false;
+}
 
 Retain._run_plugins = function(method, initialValue, callback)
 {

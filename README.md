@@ -134,6 +134,16 @@ fightClub.remove(function(record, err)
 });
 ```
 
+Sync the local record with the remote storages.
+``` javascript
+var moon = Movie.new()
+moon.set({name:"Moon"});
+moon.save(function()
+{
+  done();
+});
+```
+
 #### For more info, checkout the [__docs__](http://rawgithub.com/giuliandrimba/retain/master/docs/classes/Retain.html).
 
 ## Plugins

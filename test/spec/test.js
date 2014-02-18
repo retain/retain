@@ -71,8 +71,8 @@ describe("Retain", function()
       var fightClub = Movie.new(function(record)
       {
         record.should.have.property("get")
-        done();
       })
+        done();
 
     });
 
@@ -181,7 +181,7 @@ describe("Retain", function()
     it("should delete the movie",function(done)
     {
       var total = Movie.all().length;
-      record = Movie.find(2);
+      record = Movie.find(1);
       record.remove();
       assert.equal(total -1, Movie.all().length);
       done();
@@ -190,7 +190,7 @@ describe("Retain", function()
     it("should delete the movie remotelly",function(done)
     {
       var total = Movie.all().length;
-      record = Movie.find(1);
+      record = Movie.find(2);
       record.remove(function(res, err)
         {
           assert.equal(total -1, Movie.all().length);
@@ -207,8 +207,42 @@ describe("Retain", function()
 
       var movie = Movie.new(function(res, err)
       {
-        // DONE
+        Movie.off("new");
       })
+
+    })
+
+    it("should sync a new record", function(done)
+    {
+      var enterTheVoid = Movie.new()
+      enterTheVoid.save(function()
+      {
+        done();
+      });
+    })
+
+    it("should sync a new record with properties updated", function(done)
+    {
+      var moon = Movie.new()
+      moon.set({name:"Moon"});
+      moon.save(function()
+      {
+        done();
+      });
+    })
+
+    it("should not sync a record that wasn't created remotelly, and was removed locally", function(done)
+    {
+      var graveOfTheFireflies = Movie.new();
+
+      graveOfTheFireflies.set({name:"Grave of the Fireflies"});
+
+      graveOfTheFireflies.remove();
+
+      graveOfTheFireflies.save(function()
+      {
+        done();
+      });
     })
 
   });

@@ -88,7 +88,7 @@
         {
             "file": "lib/index.js",
             "line": 130,
-            "description": "Creates a new model instance locally.\nIf a callback were suplied, and there is at least one plugin attached to the model, creates the record remotelly.",
+            "description": "Creates a new model instance locally.\nIf a callback is suplied, and there is at least one plugin attached to the model, creates the record remotelly.",
             "itemtype": "method",
             "name": "new",
             "static": 1,
@@ -112,7 +112,7 @@
         {
             "file": "lib/index.js",
             "line": 162,
-            "description": "Sets the model instance properties locally.\n\nIf a callback were suplied, and there is at least one plugin attached to the model, updates the record remotelly.",
+            "description": "Sets the model instance properties locally.\n\nIf a callback is suplied, and there is at least one plugin attached to the model, updates the record remotelly.",
             "itemtype": "method",
             "name": "set",
             "params": [
@@ -161,7 +161,7 @@
         {
             "file": "lib/index.js",
             "line": 220,
-            "description": "Finds a model instance based on the CID or ID.\n\nIf a callback were suplied, and there is at least one plugin attached to the model, finds the record remotelly.",
+            "description": "Finds a model instance based on the CID or ID.\n\nIf a callback is suplied, and there is at least one plugin attached to the model, finds the record remotelly.",
             "itemtype": "method",
             "name": "find",
             "static": 1,
@@ -190,7 +190,7 @@
         {
             "file": "lib/index.js",
             "line": 273,
-            "description": "Get all the model instances\n\nIf a callback were suplied, and there is at least one plugin attached to the model, fetch the records remotelly.",
+            "description": "Get all the model instances\n\nIf a callback is suplied, and there is at least one plugin attached to the model, fetch the records remotelly.",
             "itemtype": "method",
             "name": "all",
             "static": 1,
@@ -214,7 +214,7 @@
         {
             "file": "lib/index.js",
             "line": 298,
-            "description": "Removes/deletes the record locally.\n\nIf a callback were suplied, and there is at least one plugin attached to the model, removes the record remotelly.",
+            "description": "Removes/deletes the record locally.\n\nIf a callback is suplied, and there is at least one plugin attached to the model, removes the record remotelly.",
             "itemtype": "method",
             "name": "find",
             "params": [
@@ -227,6 +227,25 @@
             ],
             "example": [
                 "\n ```\n   var eyesWideShut = Movies.new(function()\n   {\n     // Creates a new record remotelly\n   });\n   \n   eyesWideShut.remove() // Removes/deletes the record locally\n\n   eyesWideShut.remove(function(movie, err)\n   {\n     // Removes/deletes the record remotelly.\n   })\n\n ```"
+            ],
+            "class": "Retain"
+        },
+        {
+            "file": "lib/index.js",
+            "line": 339,
+            "description": "Sync the local record with the remote storages.\n\nIf a callback is suplied, and there is at least one plugin attached to the model, syncs the record remotelly.",
+            "itemtype": "method",
+            "name": "save",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "If suplied, it will be called when the record was synchronized remotelly.",
+                    "type": "Function",
+                    "optional": true
+                }
+            ],
+            "example": [
+                "\n ```\n   var graveOfTheFireflies = Movie.new();\n   \n   graveOfTheFireflies.set({name:\"Grave of the Fireflies\"});\n\n   graveOfTheFireflies.save(function()\n   {\n     done();\n   });\n\n ```"
             ],
             "class": "Retain"
         }
