@@ -54,7 +54,7 @@ describe("Retain", function()
 
     it("should use a plugin", function(done)
     {
-      Movie.use(plugin, {});
+      Movie.use(plugin, {url:"#"});
       done();
     });
 
@@ -163,16 +163,16 @@ describe("Retain", function()
 
     it("should get movie by cid",function(done)
     {
-      record = Movie.find(2);
+      record = Movie.find(3);
       assert.equal(record.get("name"), "Goodfellas");
       done();
     });
 
     it("should get movie by id remotelly",function(done)
     {
-      Movie.find(2, function(res, err)
+      Movie.find(3, function(res, err)
       {
-        record =  Movie.find(2);
+        record =  Movie.find(3);
         assert.equal(record.get("name"), "Goodfellas");
         done();
       });
