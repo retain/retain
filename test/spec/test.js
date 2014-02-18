@@ -170,9 +170,11 @@ describe("Retain", function()
 
     it("should get movie by id remotelly",function(done)
     {
-      Movie.find(3, function(res, err)
+      record = Movie.find(3);
+      record.id = 100;
+      Movie.find(100, function(res, err)
       {
-        record =  Movie.find(3);
+        record =  Movie.find(100);
         assert.equal(record.get("name"), "Goodfellas");
         done();
       });
@@ -229,6 +231,19 @@ describe("Retain", function()
       {
         done();
       });
+    })
+
+    it("should sync a new record saved remotelly with properties updated", function(done)
+    {
+      var moon = Movie.new(function(record, err)
+      {
+        moon.id = 0
+        moon.set({name:"Moon"});
+        moon.save(function()
+        {
+          done();
+        });
+      })
     })
 
     it("should not sync a record that wasn't created remotelly, and was removed locally", function(done)
