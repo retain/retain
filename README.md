@@ -149,8 +149,11 @@ moon.save(function()
 
 ## Plugins
 
+At start, Retain saves the data in memory, to save the data in other locations such as `localStorage` or `database`, you should use one the avaliable plugins.
+
 ★ List of avaliable plugins:
 * [retain-ajax](https://github.com/giuliandrimba/retain-ajax) [![Build Status](https://travis-ci.org/giuliandrimba/retain-ajax.png?branch=master)](https://travis-ci.org/giuliandrimba/retain-ajax) [![Coverage Status](http://coveralls.io/repos/giuliandrimba/retain-ajax/badge.png)](https://coveralls.io/r/giuliandrimba/retain-ajax)
+* [retain-localstorage](https://github.com/giuliandrimba/retain-localstorage) [![Build Status](https://travis-ci.org/giuliandrimba/retain-localstorage.png?branch=master)](https://travis-ci.org/giuliandrimba/retain-localstorage) 
 
 ### Creating a plugin
 
