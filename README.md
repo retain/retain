@@ -14,64 +14,110 @@ $ npm install retain
 
 There are many Javascripts models out there, but the majority of them are deeply coupled inside a framework, thus making it ~~impossible~~ hard to use them in another project/environment.
 
-### Initialize
-Loads __retain__
+## Example
 
 ``` javascript
-var retain = require("retain")
-```
-
-Creates a new Retain instance.
-``` javascript
+var retain = require("retain");
 var Movies = retain();
+
+Movie.attrs({
+  name:String,
+  watched:Boolean
+})
+
+var goodfellas = Movies.new() // Creates a Movie instance
+
 ```
 
-For __Coffeescript__ lovers, you can extend __Retain__ like this:
-``` coffeescript
-retain = require "retain"
+### Initialize
 
-class Movies extends retain.Retain
+Retain can be initialized in two ways:
 
-```
+* Creating a new __Retain__ instance
+  ``` javascript
+  var retain = require("retain");
+  var Movies = retain();
+  ```
 
-### Usage
+* Extending the __Retain__ constructor function.
 
-Set the model attributes with its type (for validation purposes)
+  ``` javascript
+  var Retain = require("retain").Retain;
+  var Movies = {};
+  Movies.prototype = new Retain;
+  ```
+
+> For __Coffeescript__ lovers, you can extend __Retain__ like this:
+
+  ``` coffeescript
+  retain = require "retain"
+  
+  class Movies extends retain.Retain
+  
+  ```
+
+## API
+
+First, you will have to set the Model properties with its type (for validation purpose)
+
 ``` javascript
 Movie.attrs({
   name:String,
   watched:Boolean
 })
 ```
+This way, each model instance will have these properties to be setted and validated.
 
-Inject __retainAjax__ (plugin that saves the records in webservices).
-Each plugin might have its own configuration.
-``` javascript
-var retainAjax = require("retain-ajax")
+#### CRUD methods
 
-Movie.use(retainAjax, {
-  url: "/movies"
-})
-```
+Each CRUD method have an option to update the data remotelly passing a callback as parameter.
 
-Creates a local record.
+> Creates a local record.
+
 ``` javascript
 var fightClub = Movie.new();
 ```
 
-Creates a local and remote record.
+> Creates a local and remote record.
+
 ``` javascript
 var fightClub = Movie.new(function(record, err)
 {
   // Record retrieved remotelly
 });
 ```
-Sets a record property locally.
+
+#### NEW
+
+The `new` method is responsible for creating new model instances:
+
+> Creates a local record.
+
+``` javascript
+var fightClub = Movie.new();
+```
+
+> Creates a local and remote record.
+
+``` javascript
+var fightClub = Movie.new(function(record, err)
+{
+  // Record retrieved remotelly
+});
+```
+
+#### SET
+
+The `set` method is responsible for setting and updating the model properties.
+
+> Sets the record properties locally.
+
 ``` javascript
 fightClub.set({"name": "Fight Club", watched:true});
 ```
 
-Sets a record property remotelly.
+> SSets the record properties locally and remotelly.
+
 ``` javascript
 fightClub.set({"name": "Fight Club", watched:true},function(record, err)
 {
@@ -82,17 +128,28 @@ fightClub.set({"name": "Fight Club", watched:true},function(record, err)
 })
 ```
 
-Get a record property value.
+#### GET
+
+The `get` method is responsible for retrieving the property value (from the local record)
+
+> Get a record property value.
+
 ``` javascript
 fightClub.get("name") // Fight Club
 ```
 
-Get all the records locally.
+#### ALL
+
+The `all` method fetchs all the model collection locally or remotelly.
+
+> Get all the records locally.
+
 ``` javascript
 var movies = Movie.all() // [fightClub]
 ```
 
-Get all the records locally and remotelly.
+> Get all the records remotelly and updates/overwrites the local collection.
+
 ``` javascript
 var movies = Movie.all(function(records, err)
 {
@@ -103,12 +160,19 @@ var movies = Movie.all(function(records, err)
 })
 ```
 
-Search for a record locally by ID or CID
+#### FIND
+
+The `find` method is responsible for retrieving a record, searching by `id` or `cid`.
+Search by `id` only if the data were retrieved from a remote location at least once, otherwise, search by `cid`, which is basically, the record `index` at the local array.
+
+> Search for a record locally by ID or CID.
+
 ``` javascript
 movie = Movie.find(0); // Returns fightClub reference.
 ```
 
-Search for a record remotelly by ID or CID
+> Search for a record remotelly by ID or CID
+
 ``` javascript
 movie = Movie.find(0, function(record, err)
 {
@@ -119,12 +183,18 @@ movie = Movie.find(0, function(record, err)
 });
 ```
 
-Deletes a record locally.
+#### Remove
+
+The `remove` method will delete the instance, locally or/and remotelly.
+
+> Deletes a record locally.
+
 ``` javascript
 fightClub.remove();
 ```
 
-Deletes a record remotelly.
+> Deletes a record remotelly.
+
 ``` javascript
 fightClub.remove(function(record, err)
 {
@@ -135,13 +205,21 @@ fightClub.remove(function(record, err)
 });
 ```
 
-Sync the local record with the remote storages.
+#### SAVE
+
+The `save` method will sync the local record with the remote storages.
+
+> Sync the local record with the remote storages.
+
 ``` javascript
 var moon = Movie.new()
 moon.set({name:"Moon"});
-moon.save(function()
+moon.save(function(record, err)
 {
-  done();
+  if(record)
+  {
+    done();
+  }
 });
 ```
 
@@ -149,7 +227,7 @@ moon.save(function()
 
 ## Plugins
 
-At start, Retain saves the data in memory, to save the data in other locations such as `localStorage` or `database`, you should use one the avaliable plugins.
+By default, __Retain__ saves the data in memory (which gets removed after a browser refresh). In order to save the data in other locations such as `localStorage` or `database`, you should use one the avaliable plugins.
 
 ★ List of avaliable plugins:
 * [retain-ajax](https://github.com/giuliandrimba/retain-ajax) [![Build Status](https://travis-ci.org/giuliandrimba/retain-ajax.png?branch=master)](https://travis-ci.org/giuliandrimba/retain-ajax) [![Coverage Status](http://coveralls.io/repos/giuliandrimba/retain-ajax/badge.png)](https://coveralls.io/r/giuliandrimba/retain-ajax)
@@ -157,7 +235,7 @@ At start, Retain saves the data in memory, to save the data in other locations s
 
 ### Creating a plugin
 
-Retain use Promises internally to transfer data between the plugins.
+__Retain__ use promises internally to transfer the data between the plugins.
 
 To create a plugin, it is necessary to implement each of the following __Retain__ methods.
 
@@ -167,7 +245,7 @@ To create a plugin, it is necessary to implement each of the following __Retain_
 * __find__
 * __remove__
 
-Each of theses methods must return a promise.
+Each of theses methods must return a promise with the updated record.
 
 __Example of a custom plugin:__
 
