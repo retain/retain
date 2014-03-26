@@ -233,6 +233,23 @@ By default, __Retain__ saves the data in memory (which gets removed after a brow
 * [retain-ajax](https://github.com/giuliandrimba/retain-ajax) [![Build Status](https://travis-ci.org/giuliandrimba/retain-ajax.png?branch=master)](https://travis-ci.org/giuliandrimba/retain-ajax) [![Coverage Status](http://coveralls.io/repos/giuliandrimba/retain-ajax/badge.png)](https://coveralls.io/r/giuliandrimba/retain-ajax)
 * [retain-localstorage](https://github.com/giuliandrimba/retain-localstorage) [![Build Status](https://travis-ci.org/giuliandrimba/retain-localstorage.png?branch=master)](https://travis-ci.org/giuliandrimba/retain-localstorage) 
 
+### Example
+
+``` javascript
+var retain = require("retain");
+var retainAjax = require("retain-ajax");
+
+var Movies = retain();
+
+Movies.attrs({
+  name:String.
+  watched:Boolean
+});
+
+Movies.use(retainAjax, {url:"http://remoteserver/rest/url"});
+```
+Now, whenever the data is modified, it will be saved remotelly.
+
 ### Creating a plugin
 
 __Retain__ use promises internally to transfer the data between the plugins.
