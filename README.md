@@ -1,4 +1,4 @@
-# Retain
+![Retain](assets/logo.jpg)
 
 Retain is a __browser__ (CJS) and __node__ Javascript model with plugins support.
 
