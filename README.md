@@ -223,7 +223,7 @@ moon.save(function(record, err)
 });
 ```
 
-#### For more info, checkout the [__docs__](http://rawgithub.com/giuliandrimba/retain/master/docs/classes/Retain.html).
+#### For more info, checkout the [__docs__](http://rawgithub.com/retain/retain/master/docs/classes/Retain.html).
 
 ## Plugins
 
