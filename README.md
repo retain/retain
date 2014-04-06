@@ -230,14 +230,14 @@ moon.save(function(record, err)
 By default, __Retain__ saves the data in memory (which gets removed after a browser refresh). In order to save the data in other locations such as `localStorage` or `database`, you should use one the avaliable plugins.
 
 ★ List of avaliable plugins:
-* [retain-ajax](https://github.com/retain/retain-ajax) [![Build Status](https://travis-ci.org/retain/retain-ajax.png?branch=master)](https://travis-ci.org/retain/retain-ajax) [![Coverage Status](http://coveralls.io/repos/retain/retain-ajax/badge.png)](https://coveralls.io/r/retain/retain-ajax)
+* [retain-http](https://github.com/retain/retain-http) [![Build Status](https://travis-ci.org/retain/retain-http.png?branch=master)](https://travis-ci.org/retain/retain-http) [![Coverage Status](http://coveralls.io/repos/retain/retain-http/badge.png)](https://coveralls.io/r/retain/retain-http)
 * [retain-localstorage](https://github.com/retain/retain-localstorage) [![Build Status](https://travis-ci.org/retain/retain-localstorage.png?branch=master)](https://travis-ci.org/retain/retain-localstorage) 
 
 ### Example
 
 ``` javascript
 var retain = require("retain");
-var retainAjax = require("retain-ajax");
+var retainAjax = require("retain-http");
 
 var Movies = retain();
 
