@@ -2,7 +2,7 @@
 
 Retain is a __browser__ (CJS) and __node__ Javascript model with plugins support.
 
-[![Build Status](https://travis-ci.org/retain/retain.png?branch=master)](https://travis-ci.org/giuliandrimba/retain) [![Coverage Status](https://coveralls.io/repos/retain/retain/badge.png?branch=master)](https://coveralls.io/r/giuliandrimba/retain?branch=master)
+[![Build Status](https://travis-ci.org/retain/retain.png?branch=master)](https://travis-ci.org/retain/retain) [![Coverage Status](https://coveralls.io/repos/retain/retain/badge.png?branch=master)](https://coveralls.io/r/retain/retain?branch=master)
 
 ## Installation
 
@@ -230,8 +230,8 @@ moon.save(function(record, err)
 By default, __Retain__ saves the data in memory (which gets removed after a browser refresh). In order to save the data in other locations such as `localStorage` or `database`, you should use one the avaliable plugins.
 
 ★ List of avaliable plugins:
-* [retain-ajax](https://github.com/giuliandrimba/retain-ajax) [![Build Status](https://travis-ci.org/giuliandrimba/retain-ajax.png?branch=master)](https://travis-ci.org/giuliandrimba/retain-ajax) [![Coverage Status](http://coveralls.io/repos/giuliandrimba/retain-ajax/badge.png)](https://coveralls.io/r/giuliandrimba/retain-ajax)
-* [retain-localstorage](https://github.com/giuliandrimba/retain-localstorage) [![Build Status](https://travis-ci.org/giuliandrimba/retain-localstorage.png?branch=master)](https://travis-ci.org/giuliandrimba/retain-localstorage) 
+* [retain-ajax](https://github.com/retain/retain-ajax) [![Build Status](https://travis-ci.org/retain/retain-ajax.png?branch=master)](https://travis-ci.org/retain/retain-ajax) [![Coverage Status](http://coveralls.io/repos/retain/retain-ajax/badge.png)](https://coveralls.io/r/retain/retain-ajax)
+* [retain-localstorage](https://github.com/retain/retain-localstorage) [![Build Status](https://travis-ci.org/retain/retain-localstorage.png?branch=master)](https://travis-ci.org/retain/retain-localstorage) 
 
 ### Example
 
