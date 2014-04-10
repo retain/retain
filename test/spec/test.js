@@ -71,9 +71,8 @@ describe("Retain", function()
       var fightClub = Movie.new(function(record)
       {
         record.should.have.property("get")
-      })
         done();
-
+      })
     });
 
     it("should set all the properties", function(done)
@@ -121,7 +120,7 @@ describe("Retain", function()
       var goodFellas = Movie.new();
       goodFellas.set({"name": "Goodfellas"}, function(record)
       {
-        assert.equal(record.get("name"), "Goodfellas");
+        assert.equal(goodFellas.get("name"), "Goodfellas");
         done();
       })
     });

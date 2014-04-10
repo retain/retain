@@ -12,6 +12,7 @@ module.exports = function()
       } 
       else 
       {
+        record.id = 10000;
         deferred.resolve(record);
       }
       return deferred.promise;
