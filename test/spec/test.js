@@ -168,6 +168,21 @@ describe("Retain", function()
       done();
     });
 
+    it("should find a movie by name",function(done)
+    {
+      record = Movie.find({name:"Pulp Fiction"});
+      assert.equal(record.get("name"), "Pulp Fiction");
+      done();
+    });
+
+    it("should find more than one movie by name",function(done)
+    {
+      records = Movie.find({name:"Goodfellas"});
+      assert.lengthOf(records, 2);
+      assert.equal(records[0].get("name"), "Goodfellas");
+      done();
+    });
+
     it("should get movie by id remotelly",function(done)
     {
       record = Movie.find(3);
