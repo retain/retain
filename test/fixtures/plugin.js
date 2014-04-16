@@ -12,22 +12,65 @@ module.exports = function()
       } 
       else 
       {
-        record.id = 10000;
+        record.id = Math.random() * 1000;
         deferred.resolve(record);
       }
       return deferred.promise;
     },
     set:function(record)
     {
-      return Q(record);
+      var deferred = Q.defer();
+      if(plugin.config.error) 
+      {
+        deferred.reject({error:"error"});
+      } 
+      else 
+      {
+        deferred.resolve(record);
+      }
+      return deferred.promise;
     },
     remove:function(record)
     {
-      return Q(record);
+      var deferred = Q.defer();
+      if(plugin.config.error) 
+      {
+        deferred.reject({error:"error"});
+      } 
+      else 
+      {
+        deferred.resolve(record);
+      }
+      return deferred.promise;
     },
-    find:function(record)
+    find:function(ID)
     {
-      return Q(record);
+      var deferred = Q.defer();
+      if(plugin.config.error) 
+      {
+        deferred.reject({error:"error"});
+      } 
+      else 
+      {
+        record = {};
+        record.id = Math.random() * 1000;
+        deferred.resolve(record);
+      }
+      return deferred.promise;
+    },
+    search:function(props)
+    {
+      var deferred = Q.defer();
+      if(plugin.config.error) 
+      {
+        deferred.reject({error:"error"});
+      } 
+      else 
+      {
+        record.id = Math.random() * 1000;
+        deferred.resolve([record]);
+      }
+      return deferred.promise;
     },
     config:{}
   };

@@ -127,9 +127,7 @@ describe("Retain", function()
 
     it("should validate the record attributes after creation", function(done)
     {
-      var pulpFiction = Movie.new()
-
-      pulpFiction.set({"name":"Pulp Fiction"});
+      var pulpFiction = Movie.new({"name":"Pulp Fiction"})
 
       assert.equal(pulpFiction.get("name"), "Pulp Fiction");
 
@@ -167,21 +165,6 @@ describe("Retain", function()
       done();
     });
 
-    it("should find a movie by name",function(done)
-    {
-      record = Movie.find({name:"Pulp Fiction"});
-      assert.equal(record.get("name"), "Pulp Fiction");
-      done();
-    });
-
-    it("should find more than one movie by name",function(done)
-    {
-      records = Movie.find({name:"Goodfellas"});
-      assert.lengthOf(records, 2);
-      assert.equal(records[0].get("name"), "Goodfellas");
-      done();
-    });
-
     it("should get movie by id remotelly",function(done)
     {
       record = Movie.find(3);
@@ -193,6 +176,34 @@ describe("Retain", function()
         done();
       });
     });
+
+    it("should search a movie by name",function(done)
+    {
+      record = Movie.search({name:"Pulp Fiction"});
+      assert.equal(record.get("name"), "Pulp Fiction");
+      done();
+    });
+
+    it("should search a movie by name remotelly",function(done)
+    {
+      record = Movie.search({name:"Pulp Fiction"}, function(res, err)
+      {
+        if(res)
+        {
+          assert.equal(record.get("name"), "Pulp Fiction");
+          done();
+        }
+      });
+    });
+
+    it("should find more than one movie by name",function(done)
+    {
+      records = Movie.search({name:"Goodfellas"});
+      assert.lengthOf(records, 2);
+      assert.equal(records[0].get("name"), "Goodfellas");
+      done();
+    });
+
 
     it("should delete the movie",function(done)
     {

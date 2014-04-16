@@ -68,9 +68,9 @@ Movie.attrs({
 ```
 This way, each model instance will have these properties to be setted and validated.
 
-#### CRUD methods
+#### API methods
 
-Each CRUD method have an option to update the data remotelly passing a callback as parameter.
+Each method have an option to update the data remotelly passing a callback as parameter.
 
 > Creates a local record.
 
@@ -106,6 +106,23 @@ var fightClub = Movie.new(function(record, err)
 });
 ```
 
+You can also set the newly record parameters:
+
+> Creates a local record called 'Fight Club'.
+
+``` javascript
+var fightClub = Movie.new({name:"Fight Club"});
+```
+
+> Creates a local and remote record called 'Fight Club'.
+
+``` javascript
+var fightClub = Movie.new({name:"Fight Club"},function(record, err)
+{
+  // Record retrieved remotelly
+});
+```
+
 #### SET
 
 The `set` method is responsible for setting and updating the model properties.
@@ -116,7 +133,7 @@ The `set` method is responsible for setting and updating the model properties.
 fightClub.set({"name": "Fight Club", watched:true});
 ```
 
-> SSets the record properties locally and remotelly.
+> Sets the record properties locally and remotelly.
 
 ``` javascript
 fightClub.set({"name": "Fight Club", watched:true},function(record, err)
@@ -183,7 +200,29 @@ movie = Movie.find(0, function(record, err)
 });
 ```
 
-#### Remove
+#### SEARCH
+
+The `search` method searchs for records by the specified properties.
+
+> Search for a record named 'Pulp Fiction'.
+
+``` javascript
+pulp = Movie.search({name:"Pulp Fiction"}); // Returns an array containing all thefound records
+```
+
+> Search remotelly for a record named 'Pulp Fiction'.
+
+``` javascript
+movie = Movie.find({name:"Pulp Fiction"}, function(records, err)
+{
+  if(records)
+  {
+    // Records retrieved remotelly
+  }
+});
+```
+
+#### REMOVE
 
 The `remove` method will delete the instance, locally or/and remotelly.
 
@@ -223,7 +262,40 @@ moon.save(function(record, err)
 });
 ```
 
-#### For more info, checkout the [__docs__](http://rawgithub.com/retain/retain/master/docs/classes/Retain.html).
+## Events
+
+__Retain__ uses the [__Happens__](https://github.com/serpentem/happens) library for the event system.
+
+You can bind a callback function to a __Retain__ instance event using the `happens` signature.
+
+``` javascript
+var godfather = Movie.new();
+
+godfather.on("change", function(record)
+{
+  //Record has changed
+})
+
+```
+
+#### Change
+
+Fired when an instance property changes. 
+
+#### New
+
+Fired when a new instance is created.
+
+#### Remove
+
+Fired when an instance is deleted.
+
+#### Error
+
+Fired when a plugin couldn't fetch the data.
+
+
+## [__API Docs__](http://rawgithub.com/retain/retain/master/docs/classes/Retain.html).
 
 ## Plugins
 
