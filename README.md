@@ -332,73 +332,8 @@ To create a plugin, it is necessary to implement each of the following __Retain_
 * __all__
 * __set__
 * __find__
+* __search__
 * __remove__
-
-Each of theses methods must return a promise with the updated record.
-
-__Example of a custom plugin:__
-
-> This is just an example, saving the records locally.
-
-``` javascript
-var Q = require("q");
-
-var records = [];
-
-module.exports = function()
-{
-  return {
-    new:function(record)
-    {
-      records.push(record);
-      return Q(record);
-    },
-    all:function(records)
-    {
-      return Q(records);
-    },
-    set:function(record)
-    {
-      for(var i = 0, total = records.length; i < total; i++)
-      {
-        if(record.id === records[i].id)
-        {
-          records[i] = record;
-        }
-      }
-      
-      return Q(record);
-    },
-    find:(record)
-    {
-      var found = null;
-      
-      for(var i = 0, total = records.length; i < total; i++)
-      {
-        if(record.id === records[i].id)
-        {
-          found = records[i];
-        }
-      }
-      
-      return Q(found);
-    },
-    remove:function(record)
-    {
-      for(var i = 0, total = records.length; i < total; i++)
-      {
-        if(record.id === records[i].id)
-        {
-          records.splice(i,1);
-        }
-      }
-      
-      return Q(null);
-    }
-  }
-}
-
-```
 
 
 
